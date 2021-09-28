@@ -16,4 +16,4 @@ def mine(original):
             result = crypt(original)
         print(f'[nonce] {original.nonce}')
         print(result)
-    return result
+    return result, original.nonce
