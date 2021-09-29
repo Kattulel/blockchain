@@ -18,10 +18,12 @@ class Blockchain:
         block = Block(transactions=transaction,
                       index=len(self.blocks),
                       previous_hash=self.previous_hash(),
-                      timestamp=datetime.utcnow().timestamp()
-                      )
+                      timestamp=datetime.utcnow().timestamp())
         hashed_block = crypt(block)
         self.blocks.append(hashed_block)
 
     def list(self):
         pprint(self.blocks)
+
+    def valid(self):
+        return all(_hash.startswith("000") for _hash in self.blocks)
