@@ -1,19 +1,12 @@
-from hashlib import sha256
-from block import Block
+import random
+import string
 
-def crypt(bloco: Block):
-    b_hash = sha256(bloco.str())
-    return b_hash.hexdigest()
+class Miner:
 
-def valid(b_hash):
-    return True if str(b_hash).startswith("000") else False
+    def __init__(self, bc_ref):
+        self.bc_ref = bc_ref
 
-def mine(original):
-    result = crypt(original)
-    if not valid(result):
-        while not valid(result):
-            original.nonce += 1
-            result = crypt(original)
-        print(f'[nonce] {original.nonce}')
-        print(result)
-    return result, original.nonce
+    def mine(self, interations: int):
+        for i in range(interations):
+            mensagem = ''.join(random.choices(string.ascii_uppercase + string.digits, k=20))
+            self.bc_ref.add(mensagem)
